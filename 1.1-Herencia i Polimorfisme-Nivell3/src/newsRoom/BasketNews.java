@@ -12,16 +12,22 @@ public class BasketNews extends News {
 	}
 	
 	@Override
-	public double calculatePrice() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void calculateScore() {
+		int score = getInitialScore();
+		if (competition.equalsIgnoreCase("EuroLeague")) score += 3;
+		if (competition.equalsIgnoreCase("ACB")) score += 2;
+		if (club.equalsIgnoreCase("Barça") || club.equalsIgnoreCase("Madrid")) score += 1;
+		setScore(score);
 	}
 	
-	public double calculateScore() {
-		// TODO Auto-generated method stub
-		return 0;
+	@Override
+	public void calculatePrice() {
+		double price = getInitialPrice();
+        if (competition.equalsIgnoreCase("EuroLeague")) price += 75;
+        if (club.equalsIgnoreCase("Barça") || club.equalsIgnoreCase("Madrid")) price += 75;
+        setPrice(price);
 	}
-
+	
 	public String getCompetition() {
 		return competition;
 	}

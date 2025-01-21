@@ -14,17 +14,23 @@ public class FootballNews extends News {
 	}
 	
 	@Override
-	public double calculatePrice() {
-		// TODO Auto-generated method stub
-		return 0;
+	protected void calculateScore() {
+		int score = getInitialScore();
+		if (competition.equalsIgnoreCase("Champions League")) score += 3;
+		if (club.equalsIgnoreCase("Barça") || club.equalsIgnoreCase("Madrid")) score += 1;
+		if (player.equalsIgnoreCase("Ferran Torres") || player.equalsIgnoreCase("Benzema")) score += 1;
+		setScore(score);
 	}
 	
 	@Override
-	public double calculateScore() {
-		// TODO Auto-generated method stub
-		return 0;
+	protected void calculatePrice() {
+		double price = getInitialPrice();
+        if (competition.equalsIgnoreCase("Champions League")) price += 100;
+        if (club.equalsIgnoreCase("Barça") || club.equalsIgnoreCase("Madrid")) price += 100;
+        if (player.equalsIgnoreCase("Ferran Torres") || player.equalsIgnoreCase("Benzema")) price += 50;
+        setPrice(price);
 	}
-
+	
 	public String getCompetition() {
 		return competition;
 	}

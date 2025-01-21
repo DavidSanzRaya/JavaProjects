@@ -14,10 +14,13 @@ public abstract class News {
 		this.text = "";
 		this.score = 0;
         this.price = 0.0;
+        calculateScore();
+        calculatePrice();
 	}
 	
-	public abstract double calculateScore();
-	public abstract double calculatePrice();
+	protected abstract void calculateScore();
+	protected abstract void calculatePrice();
+//	protected abstract boolean checkSpecialConditions();
 	
 	public String getHeadline() {
 		return headline;
@@ -48,8 +51,12 @@ public abstract class News {
 		this.price = price;
 	}
 
-	public NewsType getType() {
-		return type;
-	}
+	public int getInitialScore() {
+        return type.getInitialScore();
+    }
+
+    public double getInitialPrice() {
+        return type.getInitialPrice();
+    }
 
 }

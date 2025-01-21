@@ -10,14 +10,16 @@ public class MotorcyclingNews extends News {
 	}
 	
 	@Override
-	public double calculatePrice() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void calculatePrice() {
+		int score = getInitialScore();
+		if (team.equalsIgnoreCase("Honda") || team.equalsIgnoreCase("Yamaha")) score += 3;
+        setScore(score);
 	}
 	
-	public double calculateScore() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void calculateScore() {
+		double price = getInitialPrice();
+		if (team.equalsIgnoreCase("Honda") || team.equalsIgnoreCase("Yamaha")) price += 50;
+        setPrice(price);
 	}
 
 	public String getTeam() {

@@ -10,14 +10,17 @@ public class F1News extends News {
 	}
 	
 	@Override
-	public double calculatePrice() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void calculateScore() {
+		int score = getInitialScore();
+		if (team.equalsIgnoreCase("Ferrari") || team.equalsIgnoreCase("Mercedes")) score += 2;
+        setScore(score);
 	}
 	
-	public double calculateScore() {
-		// TODO Auto-generated method stub
-		return 0;
+	@Override
+	public void calculatePrice() {
+		double price = getInitialPrice();
+		if (team.equalsIgnoreCase("Ferrari") || team.equalsIgnoreCase("Mercedes")) price += 50;
+        setPrice(price);
 	}
 
 	public String getTeam() {
