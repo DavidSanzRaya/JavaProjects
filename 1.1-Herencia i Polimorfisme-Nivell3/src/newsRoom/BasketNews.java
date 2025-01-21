@@ -6,13 +6,18 @@ public class BasketNews extends News {
 	private String club;
 	
 	public BasketNews(String headline, String competition, String club) {
-		super(headline);
+		super(headline, NewsType.BASKETBALL);
 		this.competition = competition;
 		this.club = club;
 	}
 	
 	@Override
-	public double calculateNewPrice() {
+	public double calculatePrice() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	public double calculateScore() {
 		// TODO Auto-generated method stub
 		return 0;
 	}

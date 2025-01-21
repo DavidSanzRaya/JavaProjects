@@ -4,19 +4,25 @@ public abstract class News {
 	
 	private String headline;
 	private String text;
-	private int rating;
-	private int price;
+	private int score;
+	private double price;
+	private final NewsType type;
 	
-	public News(String headline) {
+	public News(String headline, NewsType type) {
 		this.headline = headline;
-		text = "";
+		this.type = type;
+		this.text = "";
+		this.score = 0;
+        this.price = 0.0;
 	}
 	
-	public abstract double calculateNewPrice();
+	public abstract double calculateScore();
+	public abstract double calculatePrice();
 	
 	public String getHeadline() {
 		return headline;
 	}
+	
 	public void setHeadline(String headline) {
 		this.headline = headline;
 	}
@@ -28,17 +34,22 @@ public abstract class News {
 		this.text = text;
 	}
 	
-	public int getRating() {
-		return rating;
+	public int getScore() {
+		return score;
 	}
-	public void setRating(int rating) {
-		this.rating = rating;
+	public void setScore(int rating) {
+		this.score = rating;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
+
+	public NewsType getType() {
+		return type;
+	}
+
 }

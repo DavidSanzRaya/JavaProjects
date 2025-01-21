@@ -7,14 +7,20 @@ public class FootballNews extends News {
 	private String player;
 	
 	public FootballNews(String headline, String competition, String club, String player) {
-		super(headline);
+		super(headline, NewsType.FOOTBALL);
 		this.competition = competition;
 		this.club = club;
 		this.player = player;
 	}
 	
 	@Override
-	public double calculateNewPrice() {
+	public double calculatePrice() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public double calculateScore() {
 		// TODO Auto-generated method stub
 		return 0;
 	}

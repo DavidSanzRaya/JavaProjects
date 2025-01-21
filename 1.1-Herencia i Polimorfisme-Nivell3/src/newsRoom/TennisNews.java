@@ -6,12 +6,17 @@ public class TennisNews extends News {
 	private String[] tennisPlayers = new String[2];
 	
 	public TennisNews(String headline, String competition) {
-		super(headline);
+		super(headline, NewsType.TENNIS);
 		this.competition = competition;
 	}
 	
 	@Override
-	public double calculateNewPrice() {
+	public double calculatePrice() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	public double calculateScore() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
