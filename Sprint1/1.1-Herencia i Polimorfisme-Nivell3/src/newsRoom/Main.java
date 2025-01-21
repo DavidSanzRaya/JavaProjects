@@ -52,16 +52,19 @@ public class Main {
 	}
 
 	public static void removeEditor() {
-		System.out.print("Enter editor DNI: ");
-		String dni = scanner.nextLine();
-		newsroom.removeEditorByDNI(dni);
+		Editor editor = askForEditor();
+		
+		if(editor == null) {
+			System.out.println("Editor not found.");
+            return;
+		}
+		
+		newsroom.removeEditorByDNI(editor.getDNI());
 		System.out.println("Editor removed successfully.");
 	}
 	
 	public static void addNewsToEditor() {
-		System.out.print("Enter editor DNI: ");
-		String dni = scanner.nextLine();
-		Editor editor = newsroom.findEditorByDNI(dni);
+		Editor editor = askForEditor();;
 		
 		if (editor == null) {
             System.out.println("Editor not found.");
@@ -115,6 +118,7 @@ public class Main {
         }
         
         if (news != null) {
+        	newsroom.addNews(news);
             editor.addNews(news);
             System.out.println("News added successfully.");
         } else {
@@ -132,7 +136,13 @@ public class Main {
 
         System.out.print("Enter news headline to remove: ");
         String headline = scanner.nextLine();
-        editor.removeNews(headline, NewsType.values()[displayNewsTypeSelector() - 1]);
+        News news = newsroom.findNews(headline, NewsType.values()[displayNewsTypeSelector() - 1]);
+        
+        if(news == null) {
+        	System.out.println("Unable to find the news");
+        }
+        
+        editor.removeNews(news);
         System.out.println("News removed successfully.");
 	}
 	
@@ -144,15 +154,29 @@ public class Main {
             return;
         }
         
-        System.out.println(editor.getNewsList());
+        for(News news : editor.getNewsList()){
+        	System.out.println("\nHeadline: " + news.getHeadline() + "\nEditor: " + editor.getName());
+        }
 	}
 	
 	public static void getNewsScore() {
-		
+        News news = askForNews();
+        
+        if(news == null) {
+        	System.out.println("Unable to find the news");
+        }
+        
+        System.out.println("Score: " + news.getScore());
 	}
 	
 	public static void getNewsPrice() {
-		
+		News news = askForNews();
+        
+        if(news == null) {
+        	System.out.println("Unable to find the news");
+        }
+        
+        System.out.println("Score: " + news.getPrice());
 	}
 	
 	private static int displayNewsTypeSelector() {
@@ -170,5 +194,11 @@ public class Main {
 		System.out.print("Enter editor DNI: ");
         String dni = scanner.nextLine();
         return newsroom.findEditorByDNI(dni);
+	}
+	
+	private static News askForNews() {
+		System.out.print("Enter news headline to remove: ");
+        String headline = scanner.nextLine();
+        return newsroom.findNews(headline, NewsType.values()[displayNewsTypeSelector() - 1]);
 	}
 }

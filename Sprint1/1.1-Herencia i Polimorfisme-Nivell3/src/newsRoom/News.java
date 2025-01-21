@@ -14,8 +14,6 @@ public abstract class News {
 		this.text = "";
 		this.score = 0;
         this.price = 0.0;
-        calculateScore();
-        calculatePrice();
 	}
 	
 	protected abstract void calculateScore();
@@ -37,6 +35,9 @@ public abstract class News {
 	}
 	
 	public int getScore() {
+		if(score == 0)
+			calculateScore();
+		
 		return score;
 	}
 	public void setScore(int rating) {
@@ -44,6 +45,9 @@ public abstract class News {
 	}
 
 	public double getPrice() {
+		if(price == 0.0)
+			calculatePrice();
+		
 		return price;
 	}
 	public void setPrice(double price) {
@@ -61,5 +65,5 @@ public abstract class News {
 	public NewsType getType() {
 		return type;
 	}
-
+	
 }

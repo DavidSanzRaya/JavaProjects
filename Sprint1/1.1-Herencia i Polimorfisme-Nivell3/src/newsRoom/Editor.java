@@ -1,6 +1,6 @@
 package newsRoom;
 
-import java.util.List;
+import java.util.*;
 
 public class Editor {
 	private String name;
@@ -11,6 +11,7 @@ public class Editor {
 	public Editor(String name, String DNI) {
 		this.name = name;
 		this.DNI = DNI;
+		newsList = new ArrayList<News>();
 	}
 	
 	public String getName() {
@@ -37,7 +38,7 @@ public class Editor {
 	public void addNews(News news) {
 		newsList.add(news);
 	}
-	public void removeNews(String headline, NewsType type) {
-		newsList.removeIf(news -> news.getHeadline().equalsIgnoreCase(headline) && news.getType() == type);
+	public void removeNews(News news) {
+		newsList.remove(news);
 	}
 }

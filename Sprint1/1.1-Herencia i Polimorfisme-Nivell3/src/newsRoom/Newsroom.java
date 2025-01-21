@@ -4,9 +4,19 @@ import java.util.*;
 
 public class Newsroom {
 	private List<Editor> editors;
+	private List<News> newsList;
+	
+	public Newsroom() {
+		editors = new ArrayList<Editor>();
+		newsList = new ArrayList<News>();
+	}
 	
 	public void addEditor(Editor editor) {
 		editors.add(editor);
+	}
+	
+	public void addNews(News news) {
+		newsList.add(news);
 	}
 	
 	public void removeEditorByDNI(String dni) {
@@ -20,8 +30,11 @@ public class Newsroom {
 				.orElse(null);
 	}
 	
-	public void removeNewsFromEditor(News news, Editor editor) {
-		
+	public News findNews(String headline, NewsType type) {
+		return newsList.stream()
+				.filter(news -> news.getHeadline().equalsIgnoreCase(headline) && news.getType() == type)
+				.findFirst()
+				.orElse(null);
 	}
 	
 	public List<News> getNewsByEditor() {
