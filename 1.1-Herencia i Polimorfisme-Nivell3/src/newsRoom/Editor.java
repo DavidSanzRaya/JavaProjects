@@ -6,7 +6,7 @@ public class Editor {
 	private String name;
 	private final String DNI;
 	private static double salary = 1500.0;
-	private List<News> news;
+	private List<News> newsList;
 	
 	public Editor(String name, String DNI) {
 		this.name = name;
@@ -16,7 +16,7 @@ public class Editor {
 	public Editor(String name, String DNI, List<News> news) {
 		this.name = name;
 		this.DNI = DNI;
-		this.news = news;
+		this.newsList = news;
 	}
 	
 	public String getName() {
@@ -37,10 +37,13 @@ public class Editor {
 		Editor.salary = salary;
 	}
 	
-	public List<News> getNews() {
-		return news;
+	public List<News> getNewsList() {
+		return newsList;
 	}
-	public void setNews(List<News> news) {
-		this.news = news;
+	public void addNews(News news) {
+		newsList.add(news);
+	}
+	public void removeNews(News news) {
+		newsList.removeIf(n -> n.getHeadline().equalsIgnoreCase(news.getHeadline()));
 	}
 }
