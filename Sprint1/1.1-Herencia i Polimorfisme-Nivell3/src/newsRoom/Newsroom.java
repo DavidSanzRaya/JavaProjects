@@ -9,12 +9,15 @@ public class Newsroom {
 		editors.add(editor);
 	}
 	
-	public void removeEditor(Editor editor) {
-		
+	public void removeEditorByDNI(String dni) {
+		editors.removeIf(editor -> editor.getDNI().equals(dni));
 	}
 	
-	public void addNewsToEditor(News news, Editor editor) {
-		
+	public Editor findEditorByDNI(String dni) {
+		return editors.stream()
+				.filter(editor -> editor.getDNI().equalsIgnoreCase(dni))
+				.findFirst()
+				.orElse(null);
 	}
 	
 	public void removeNewsFromEditor(News news, Editor editor) {

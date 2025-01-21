@@ -12,12 +12,6 @@ public class Editor {
 		this.name = name;
 		this.DNI = DNI;
 	}
-
-	public Editor(String name, String DNI, List<News> news) {
-		this.name = name;
-		this.DNI = DNI;
-		this.newsList = news;
-	}
 	
 	public String getName() {
 		return name;
@@ -43,7 +37,7 @@ public class Editor {
 	public void addNews(News news) {
 		newsList.add(news);
 	}
-	public void removeNews(News news) {
-		newsList.removeIf(n -> n.getHeadline().equalsIgnoreCase(news.getHeadline()));
+	public void removeNews(String headline, NewsType type) {
+		newsList.removeIf(news -> news.getHeadline().equalsIgnoreCase(headline) && news.getType() == type);
 	}
 }

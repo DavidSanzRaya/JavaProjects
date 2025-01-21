@@ -20,7 +20,6 @@ public abstract class News {
 	
 	protected abstract void calculateScore();
 	protected abstract void calculatePrice();
-//	protected abstract boolean checkSpecialConditions();
 	
 	public String getHeadline() {
 		return headline;
@@ -58,5 +57,9 @@ public abstract class News {
     public double getInitialPrice() {
         return type.getInitialPrice();
     }
+
+	public NewsType getType() {
+		return type;
+	}
 
 }
