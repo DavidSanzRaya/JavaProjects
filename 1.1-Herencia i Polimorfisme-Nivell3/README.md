@@ -1,1 +1,1 @@
-"# Herencia i Polimorfisme" 
+# Herencia i Polimorfisme
