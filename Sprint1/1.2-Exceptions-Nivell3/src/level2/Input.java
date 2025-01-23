@@ -6,99 +6,35 @@ public class Input {
 	private static Scanner scanner = new Scanner(System.in);
 
 	public static byte readByte(String message) {
-		byte input = 0;
-		boolean inputMismatch;
-		
-		do {
-			inputMismatch = false;
-			try {				
-				System.out.print("\n" + message + ": ");
-				input = scanner.nextByte();
-				
-			} catch(InputMismatchException e) {
-				
-				System.out.println("Format error");
-				inputMismatch = true;
-			} finally {
-				scanner.nextLine();
-			}
-		} while(inputMismatch);
-		
-		return input;
+		return readInput(message, Byte.class);
 	}
 	
 	public static int readInt(String message) {
-		int input = 0;
-		boolean inputMismatch;
-		
-		do {
-			inputMismatch = false;
-			try {				
-				System.out.print("\n" + message + ": ");
-				input = scanner.nextInt();
-				
-			} catch(InputMismatchException e) {
-				
-				System.out.println("Format error");
-				inputMismatch = true;
-			} finally {
-				scanner.nextLine();
-			}
-		} while(inputMismatch);
-		
-		return input;
+		return readInput(message, Integer.class);
 	}
 	
 	public static float readFloat(String message) {
-		float input = 0;
-		boolean inputMismatch;
-		
-		do {
-			inputMismatch = false;
-			try {				
-				System.out.print("\n" + message + ": ");
-				input = scanner.nextFloat();
-				
-			} catch(InputMismatchException e) {
-				
-				System.out.println("Format error");
-				inputMismatch = true;
-			} finally {
-				scanner.nextLine();
-			}
-		} while(inputMismatch);
-		
-		return input;
+		return readInput(message, Float.class);
 	}
 	
 	public static double readDouble(String message) {
-		double input = 0;
-		boolean inputMismatch;
-		
-		do {
-			inputMismatch = false;
-			try {				
-				System.out.print("\n" + message + ": ");
-				input = scanner.nextDouble();
-				
-			} catch(InputMismatchException e) {
-				
-				System.out.println("Format error");
-				inputMismatch = true;
-			} finally {
-				scanner.nextLine();
-			}
-		} while(inputMismatch);
-		
-		return input;
+		return readInput(message, Double.class);
 	}
 	
-	// More generic method to read inputs of byte, integer, float, double
-	public static <T> T readInput(String message, Class<T> type) {
+	public static char readChar(String message) {
+		return readInput(message, Character.class);
+	}
+	
+	public static String readString(String message) {
+		return readInput(message, String.class);
+	}
+	
+	private static <T> T readInput(String message, Class<T> type) {
 		T input = null;
 		boolean inputMismatch;
 		
 		do {
+			
 			inputMismatch = false;
 			
 			try {
@@ -111,12 +47,26 @@ public class Input {
 					input = type.cast(scanner.nextFloat());
 				else if (type == Double.class)
 					input = type.cast(scanner.nextDouble());
-				else
-					throw new IllegalArgumentException();
+				else if (type == Character.class) {
+					input = type.cast(scanner.nextLine().charAt(0));
+					
+					if(input.toString().contains("ç"))
+						throw new InputUnreadableException("Not able to read input");
+					
+				}
+				else if (type == String.class) {
+					input = type.cast(scanner.nextLine());
+					
+					if(input.toString().contains("ç"))
+						throw new InputUnreadableException("Not able to read input");
+					
+				}
 				
-			} catch(InputMismatchException e) {
-				System.out.println("Format error");
+			} catch(InputMismatchException | InputUnreadableException e) {
+				String exceptionMessage = e.getMessage() == null ? "Format error" : e.getMessage();
+				System.out.println(exceptionMessage);
 				inputMismatch = true;
+				
 			} finally {
 				scanner.nextLine();
 			}
